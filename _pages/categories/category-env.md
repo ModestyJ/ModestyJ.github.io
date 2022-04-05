@@ -1,9 +1,9 @@
 ---
-title: "DEVELOPMENT ENV"
+title: "ENVIRONMENT"
 layout: category
 permalink: /categories/env/
 author_profile: true
-taxonomy: DEVELOPMENT ENV
+taxonomy: ENVIRONMENT
 sidebar:
   nav: "categories"
 ---

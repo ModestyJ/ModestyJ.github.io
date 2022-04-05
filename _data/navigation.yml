@@ -19,12 +19,12 @@ main:
 # sidebar navigation (categories)
 categories:
 - title: "Architecture"
-  url: /categories/ca/
+  url: /categories/arch/
 - title: "Machine Learning"
   url: /categories/ml
 - title: "Chip"
   url: /categories/chip
 - title: "Language"
   url: /categories/lang
-- title: "Development Env"
+- title: "Environment"
   url: /categories/env
