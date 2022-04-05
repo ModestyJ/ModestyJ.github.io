@@ -1,12 +1,30 @@
 # main links
 main:
-  - title: "Quick-Start Guide"
-    url: https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/
-  # - title: "About"
-  #   url: https://mmistakes.github.io/minimal-mistakes/about/
-  # - title: "Sample Posts"
-  #   url: /year-archive/
-  # - title: "Sample Collections"
-  #   url: /collection-archive/
-  # - title: "Sitemap"
-  #   url: /sitemap/
+  - title: "Home"
+    url: https://modestyj.github.io/
+
+  - title: "About"
+    url: /about/
+
+  - title: "GitHub"
+    url: https://github.com/ModestyJ
+
+  # - title: "Projects"
+  #   url: /projects/
+
+  # - title: "Categories"
+  #   url: /categories/
+
+
+# sidebar navigation (categories)
+categories:
+- title: "Architecture"
+  url: /categories/ca/
+- title: "Machine Learning"
+  url: /categories/ml
+- title: "Chip"
+  url: /categories/chip
+- title: "Language"
+  url: /categories/lang
+- title: "Development Env"
+  url: /categories/env
