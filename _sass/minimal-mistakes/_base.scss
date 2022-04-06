@@ -230,6 +230,15 @@ figure {
     transition: $global-transition;
   }
 
+  /* JC: image cpation */
+  img + em {
+      display: block;
+      text-align: center;
+      font-size: .8rem;
+      color: light-grey;
+  }
+  /* JC: image cpation */
+
   > a {
     display: block;
   }
