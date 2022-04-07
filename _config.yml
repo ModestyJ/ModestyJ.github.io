@@ -103,7 +103,7 @@ analytics:
 # Site Author
 author:
   name             : "ModestyJ"
-  avatar           : "assets/images/apu.svg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "assets/images/logo.svg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   #bio              : "늦깎이 대학원생"
   #location         : "Seoul, Republic of Korea"
   #email            : "modesty.j@gmail.com"

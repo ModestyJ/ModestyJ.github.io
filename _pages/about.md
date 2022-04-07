@@ -6,7 +6,7 @@ comments: false
 ---
 
 <div>
-    <img src="/assets/images/logo.jpg" width="30%" min-width=500px alt="about_modesty" itemprop="image">
+    <img src="/assets/images/author_profile.jpg" width="30%" min-width=500px alt="about_modesty" itemprop="image">
 </div>
 
 <div>

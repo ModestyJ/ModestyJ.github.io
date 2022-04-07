@@ -12,6 +12,11 @@
   <head>
     {% include head.html %}
     {% include head/custom.html %}
+    <!-- JC: Add mathjax(_includes/mathjax_support.html) -->
+    {% if page.use_math %}
+      {% include mathjax_support.html %}
+    {% endif %}
+    <!-- JC: Add mathjax(_includes/mathjax_support.html) -->
   </head>
 
   <body class="layout--{{ page.layout | default: layout.layout }}{% if page.classes or layout.classes %}{{ page.classes | default: layout.classes | join: ' ' | prepend: ' ' }}{% endif %}">
