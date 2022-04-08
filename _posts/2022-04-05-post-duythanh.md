@@ -7,11 +7,13 @@ categories:
 tags:
   - [FPGA, YOLO, CNN, object detection]
 
-permalink: /categories/arch/
+permalink: /categories/arch/yolo_cnn
 
 date: 2022-04-05
-last_modified_at: 2022-04-05
+last_modified_at: 2022-04-09
 ---
+D. T. Nguyen, T. N. Nguyen, H. Kim, and H.-J. Lee, “A High-Throughput and Power-Efficient FPGA Implementation of YOLO CNN for Object Detection,” IEEE Transactions on Very Large Scale Integration (VLSI) Systems, vol. 27, no. 8, pp. 1861–1873, Aug. 2019, doi: 10.1109/TVLSI.2019.2905242.
+
 - [Overview](#overview)
 - [Motivation](#motivation)
 - [Algorithmic Optimization for the Proposed Streaming Architecture](#algorithmic-optimization-for-the-proposed-streaming-architecture)
