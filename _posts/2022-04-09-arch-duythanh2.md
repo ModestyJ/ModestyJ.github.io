@@ -7,7 +7,7 @@ categories:
 tags:
   - [FPGA, YOLO, CNN, object detection]
 
-permalink: /categories/arch/yolo_cnn2
+permalink: /categories/arch/yolo_cnn_2
 
 date: 2022-04-09
 last_modified_at: 2022-04-09
