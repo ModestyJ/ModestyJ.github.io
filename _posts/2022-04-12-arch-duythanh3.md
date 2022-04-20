@@ -18,6 +18,7 @@ D. T. Nguyen, H. Je, T. N. Nguyen, S. Ryu, K. Lee, and H.-J. Lee, “ShortcutFus
 - [Motivation](#motivation)
 - [Shortcut Fusion](#shortcut-fusion)
 - [Reuse-Aware Shortcut Optimizer](#reuse-aware-shortcut-optimizer)
+- [Experimental Results](#experimental-results)
 
 ## Overview
 
@@ -60,3 +61,15 @@ FPN과 같은 shortcut이 있는 경우 conv, element-wise adder를 따로 계�
 ![Image8](/assets/images/shortcut_fusion_2022/shortcut_fusion-image-8.png){: . width="400px" .align-center}  
 
 ## Reuse-Aware Shortcut Optimizer
+Cut-points 예제.
+![Image9](/assets/images/shortcut_fusion_2022/shortcut_fusion-image-9.png){: . width="500px" .align-center}  
+Yolov3같은 FPN 계열, _[Q]PANet 계열_, _[Q]BiFPN 계열_
+![Image10](/assets/images/shortcut_fusion_2022/shortcut_fusion-image-10.png){: . width="500px" .align-center}  
+Residual block을 포함하는 shortcut 유무, Sequeeze-Excitation(SE) network 유무에 따라 4가지 경우 buffer 할당 예시.
+![Image11](/assets/images/shortcut_fusion_2022/shortcut_fusion-image-11.png){: . width="500px" .align-center}  
+_[Q] Buffer size 계산 파트. 추가 수식들 더 있음._
+![Image12](/assets/images/shortcut_fusion_2022/shortcut_fusion-image-12.png){: . width="400px" .align-center}  
+Retinanet의 경우 2개의 cut-points에 따라 의도대로 estimation 되는 결과.
+![Image13](/assets/images/shortcut_fusion_2022/shortcut_fusion-image-13.png){: . width="500px" .align-center}  
+
+## Experimental Results
