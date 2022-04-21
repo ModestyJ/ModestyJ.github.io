@@ -1,6 +1,6 @@
 ---
 title: "[ENV] darknet 사용을 위한 CUDA, OPENCV 환경"
-excerpt: "Ubuntu environment setup for CUDA, cuDNN, OpenCV"
+excerpt: "Ubuntu GPU environment setup for darkent"
 
 categories:
   - ENVIRONMENT
@@ -54,7 +54,7 @@ conda install cmake
 [cuda-toolkit](hhtps://developer.nvidia.com/cuda-downloads)에서 상황에 맞게 다운로드.
 conda or pip install로 받는건 일부임.
 
-![Image1](/assets/images/darknet/darknet-image-1.png){: . width='500px' .align-center}  
+![Image1](/assets/images/darknet/darknet-image-1.png){: . width='500px'}  
 ```bash
 wget https://developer.download.nvidia.com/compute/cuda/11.6.2/local_installers/cuda_11.6.2_510.47.03_linux.run
 
@@ -62,8 +62,8 @@ wget https://developer.download.nvidia.com/compute/cuda/11.6.2/local_installers/
 cuda/samples
 ```
 
-![Image2](/assets/images/darknet/darknet-image-2.png){: . width='500px' .align-center}  
-![Image3](/assets/images/darknet/darknet-image-3.png){: . width='500px' .align-center}  
+![Image2](/assets/images/darknet/darknet-image-2.png){: . width='500px'}  
+![Image3](/assets/images/darknet/darknet-image-3.png){: . width='500px'}  
 
 ```bash
 ~/.bashrc
@@ -74,7 +74,7 @@ export LD_LIBRARY_PATH=/home/jckim/tools/cuda/lib64:$LD_LIBRARY_PATH
 ## Install cuDNN
 [cudnn](https://developer.nvidia.com/rdp/cudnn-download) download after login. Toolkit이 잘 설치되어 있다면 복사만 해주면 된다.
 
-![Image4](/assets/images/darknet/darknet-image-4.png){: . width='500px' .align-center}  
+![Image4](/assets/images/darknet/darknet-image-4.png){: . width='500px'}  
 
 ```bash
 tar xvf cudnn-linux-x86_64-8.4.0.27_cuda11.6-archive.tar.xz
@@ -181,4 +181,4 @@ wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optim
 cd ..
 ./darknet detect cfg/yolov4.cfg models/yolov4.weights data/person.jpg
 ```
-![Image5](/assets/images/darknet/darknet-image-5.png){: .align-center}  
+![Image5](/assets/images/darknet/darknet-image-5.png)
