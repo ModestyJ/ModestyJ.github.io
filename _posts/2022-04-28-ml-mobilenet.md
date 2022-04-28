@@ -22,6 +22,9 @@ A. G. Howard et al., “MobileNets: Efficient Convolutional Neural Networks for 
 Depthwise Separable Convolution을 적용한 첫 번째 CNN architecture로 image feature map 추출을 적은 parameter, 연산량으로 할 수 있다. multimodal task에 대해 좋은 성능을 확인 했음.
 
 
+Depthwise Separable Convolution은 [여기](https://eli.thegreenplace.net/2018/depthwise-separable-convolutions-for-machine-learning) 잘 정리 됨.
+[![Image0](https://eli.thegreenplace.net/images/2018/conv2d-depthwise-separable.svg){: . width="500px" .align-center}](https://eli.thegreenplace.net/2018/depthwise-separable-convolutions-for-machine-learning)
+
 각 channel에 대해 depthwise convolutional filter를 적용하고(# channel N->N), 그 결과에 대해 1x1 pointwise convolution을 적용한다.(# channel N->M)
 > N = Input channel size  
 > M = Output channel size  
