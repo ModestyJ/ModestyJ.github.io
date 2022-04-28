@@ -19,7 +19,7 @@ A. G. Howard et al., “MobileNets: Efficient Convolutional Neural Networks for 
 - [Mobilenetv3](#mobilenetv3)
 
 ## Overview
-Depthwise Separable Convolution을 적용한 첫 번째 CNN architecture로 image feature map 추출을 적은 parameter, 연산량으로 할 수 있다. multimodal task에 대해 좋은 성능을 확인 했음.
+Depthwise Separable Convolution을 적용한 CNN architecture로 image feature map 추출을 적은 parameter, 연산량으로 할 수 있다. Object detection(SSD)을 포함한 다양한 vision task에 대해 좋은 성능을 확인 했음.
 
 
 Depthwise Separable Convolution은 [여기](https://eli.thegreenplace.net/2018/depthwise-separable-convolutions-for-machine-learning) 잘 정리 됨.
@@ -38,6 +38,7 @@ Depthwise Separable Convolution은 [여기](https://eli.thegreenplace.net/2018/d
 ![Image3](/assets/images/mobilenet/mobilenet-image-3.png){: . width="500px" .align-center}  
 
 실제 layer 별 parameter 수를 계산 해 보면 다음과 같음. 8bits weight에 대해 약 3MB 필요.
+일반적인 conv는 첫 번째 layer에만 사용 되고, pooling도 마지막에 한 번만 있다. 1x1 pointwise convolution parameter가 가장 많은 연산을 차지한다.
 ![Image4](/assets/images/mobilenet/mobilenet-image-4.png){: . width="600px" .align-center}  
 
 ## Mobilenetv2
