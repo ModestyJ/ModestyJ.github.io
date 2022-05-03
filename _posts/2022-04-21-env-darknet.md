@@ -99,7 +99,7 @@ cd build
 nvidia-smi -L
 GPU 0: NVIDIA GeForce GTX TITAN X
 ```
-[CUDA compute capability](https://en.wikipedia.org/wiki/CUDA) should be matched with **CUDA_ARCH_BIN**
+[CUDA compute capability](https://developer.nvidia.com/cuda-gpus)(또는 [wiki](https://en.wikipedia.org/wiki/CUDA)) should be matched with **CUDA_ARCH_BIN**
 
 ```bash
 cmake -D CMAKE_BUILD_TYPE=RELEASE \
@@ -138,8 +138,8 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
   -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-4.4.0/modules \
   -D WITH_CUDNN=ON \
   -D OPENCV_DNN_CUDA=ON \
-  -D CUDA_ARCH_BIN=6.1 \
-  -D CUDA_ARCH_PTX=6.1 \
+  -D CUDA_ARCH_BIN=5.2 \
+  -D CUDA_ARCH_PTX=5.2 \
   -D CUDNN_LIBRARY=/home/jckim/tools/cuda/lib64/libcudnn.so.8.4.0 \
   -D CUDNN_INCLUDE_DIR=/home/jckim/tools/cuda/include  ..
 ```
