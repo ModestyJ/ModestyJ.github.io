@@ -26,8 +26,8 @@ Depthwise Separable Convolution은 [여기](https://eli.thegreenplace.net/2018/d
 [![Image0](https://eli.thegreenplace.net/images/2018/conv2d-depthwise-separable.svg){: . width="500px" .align-center}](https://eli.thegreenplace.net/2018/depthwise-separable-convolutions-for-machine-learning)
 
 각 channel에 대해 depthwise convolutional filter를 적용하고(# channel N->N), 그 결과에 대해 1x1 pointwise convolution을 적용한다.(# channel N->M)
-> N = Input channel size  
-> M = Output channel size  
+> M = Input channel size  
+> N = Output channel size  
 > $D_K$ = Kernel size  
 > $D_F$ = Input feature size  
 
