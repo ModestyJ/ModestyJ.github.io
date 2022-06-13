@@ -39,7 +39,9 @@ Depthwise Separable Convolution은 [여기](https://eli.thegreenplace.net/2018/d
 
 실제 layer 별 parameter 수를 계산 해 보면 다음과 같음. 8bits weight에 대해 약 3MB 필요.
 일반적인 conv는 첫 번째 layer에만 사용 되고, pooling도 마지막에 한 번만 있다. 1x1 pointwise convolution parameter가 가장 많은 연산을 차지한다.
-![Image4](/assets/images/mobilenet/mobilenet-image-4.png){: . width="600px" .align-center}  
+![Image4](/assets/images/mobilenet/mobilenet-image-4.png){: . width="500px" .align-center}  
+
+MAC utilization 계산을 위해 layer 별 operations 수를 계산하면 다음과 같다.
 
 | Type | Layer   | \# params | Stride | in\_ch | in\_act\_width | \# mul    | \# add     | \# mul+add |
 | ---- | ------- | --------- | ------ | ------ | -------------- | --------- | ---------- | ---------- |
@@ -71,7 +73,7 @@ Depthwise Separable Convolution은 [여기](https://eli.thegreenplace.net/2018/d
 | dw   | 25      | 9216      | 2      | 1024   | 7              | 112896    | 100352     | 213248     |
 | pw   | 26      | 1048576   | 1      | 1024   | 7              | 51380224  | 51330048   | 102710272  |
 | FC   | 27      | 1024000   | \-     | 1024   | \-             | 1024000   | 1023000    | 2047000    |
-| sum  | 4209088 | \-        |        | \-     | 568401664      | 562592792 | 1130994456 |
+| sum  |         | 4209088   | \-     | \-     | \-             | 568401664 | 562592792  | 1130994456 |
 
 ## Mobilenetv2
 
