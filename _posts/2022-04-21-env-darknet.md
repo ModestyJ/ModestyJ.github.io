@@ -10,7 +10,7 @@ tags:
 permalink: /categories/env/darknet
 
 date: 2022-04-21
-last_modified_at: 2022-04-21
+last_modified_at: 2022-06-17
 ---
 
 - [Overview](#overview)
@@ -19,7 +19,8 @@ last_modified_at: 2022-04-21
 - [Install cuDNN](#install-cudnn)
 - [Install OpenCV](#install-opencv)
   - [Errors](#errors)
-- [Install darknet](#install-darknet)
+- [Install darknet (folked by AlexeyAB, yolov4 author)](#install-darknet-folked-by-alexeyab-yolov4-author)
+- [Darknet official repository](#darknet-official-repository)
 
 ## Overview
 YOLO의 아버지 Joseph Redmon님께서 만드신 C language base의 darknet이라는 framework이 reference로 릴리즈 된다. 다른 framework(pytorch, tensorflow) porting 된 결과도 있지만 이번 기회에 한 번 사용해 보자.  
@@ -161,8 +162,8 @@ conda uninstall libtiff
 conda install numpy
 ```
 
-## Install darknet
-[yolo4 darket](https://github.com/AlexeyAB/darknet) 참조.
+## Install darknet (folked by AlexeyAB, yolov4 author)
+[yolov4 darknet](https://github.com/AlexeyAB/darknet) 참조.
 ```bash
 git clone https://github.com/AlexeyAB/darknet
 cd darknet
@@ -172,7 +173,6 @@ cmake -D CUDNN_LIBRARY=/home/jckim/tools/cuda/lib64/libcudnn.so.8.4.0 -D CUDNN_I
 cmake --build . --target install --parallel 6
 ```
 
-
 ```bash
 mkdir models
 cd models
@@ -181,4 +181,23 @@ wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optim
 cd ..
 ./darknet detect cfg/yolov4.cfg models/yolov4.weights data/person.jpg
 ```
+
 ![Image5](/assets/images/darknet/darknet-image-5.png)
+
+## Darknet official repository
+[darknet official](https://github.com/pjreddie/darknet) 참조.
+```bash
+git clone https://github.com/pjreddie/darknet
+cd darknet
+make
+```
+
+```bash
+mkdir models
+cd models
+wget https://pjreddie.com/media/files/yolov3.weights
+
+cd ..
+./darknet detect cfg/yolov3.cfg models/yolov3.weights data/dog.jpg
+```
+![Image6](/assets/images/darknet/darknet-image-6.png){: . width="500px" .align-center}  
