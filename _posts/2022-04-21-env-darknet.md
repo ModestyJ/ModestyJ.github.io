@@ -200,4 +200,4 @@ wget https://pjreddie.com/media/files/yolov3.weights
 cd ..
 ./darknet detect cfg/yolov3.cfg models/yolov3.weights data/dog.jpg
 ```
-![Image6](/assets/images/darknet/darknet-image-6.png){: . width="500px" .align-center}  
+![Image6](/assets/images/darknet/darknet-image-6.png){: . width="500px"}  
