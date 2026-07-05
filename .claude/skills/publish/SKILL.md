@@ -1,21 +1,24 @@
 ---
-description: Convert a ready publication candidate from the Cairn vault into a Jekyll post on github.io
+name: publish
+description: Convert a ready publication candidate from the Cairn vault into a Jekyll post on the ModestyJ.github.io blog. Use only when the user explicitly asks to publish a Cairn candidate.
 ---
 
-Publish a reviewed **publication candidate** from the user's Obsidian vault ("Cairn") into this Jekyll blog. Follow this repo's `CLAUDE.md` conventions exactly.
+# Publish a candidate to github.io
+
+Convert a reviewed **publication candidate** from the user's Obsidian vault ("Cairn") into a Jekyll post in the `ModestyJ.github.io` repo. Follow that repo's `CLAUDE.md` conventions exactly.
 
 ## Resolve paths (portable — no hardcoded absolute path)
 First that exists wins (`test -d`):
 - **VAULT**: `$CAIRN_VAULT_DIR` → sibling `../obsidian` → `/Users/jckim/Library/CloudStorage/OneDrive-Personal/obsidian`
 - **BLOG** (cwd is usually this): `$CAIRN_BLOG_DIR` → sibling `../ModestyJ.github.io` → current repo root
-If none resolve, ask the user. (Sibling clones use `../`; this Mac uses OneDrive/`~/work`.)
+If none resolve, ask the user.
 
 ## Layout
 - Candidates: `<VAULT>/Publish/<slug>/<slug>.md`; diagrams + auto-exported SVGs in `<VAULT>/Publish/<slug>/diagrams/`
 - Posts: `<BLOG>/_posts/`; images: `<BLOG>/assets/images/<slug>/`
 
 ## Select the candidate
-`$ARGUMENTS` may name a slug/title. Otherwise scan `<VAULT>/Publish/*/` for `status: ready` candidates and list them; if >1, ask which. Only publish `ready` unless the user overrides.
+If the user named a slug/title, use it. Otherwise scan `<VAULT>/Publish/*/` for `status: ready` candidates and list them; if more than one, ask which. Only publish `ready` unless the user overrides.
 
 ## Category mapping (candidate `category` key → blog taxonomy)
 | key | permalink base | `categories:` value | title prefix |
@@ -46,10 +49,10 @@ If none resolve, ask the user. (Sibling clones use `../`; this Mac uses OneDrive
    last_modified_at: <today>
    ---
    ```
-5. **Verify**: `bundle exec jekyll build` if feasible, or confirm the post path, permalink, and that every referenced image exists.
+5. **Verify**: `bundle exec jekyll build` if feasible, or confirm post path, permalink, and that every referenced image exists.
 6. **Update the candidate** (in VAULT): set `status: published` and `published_url: https://ModestyJ.github.io/categories/<key>/<slug>`.
 7. **Commit for portability**:
-   - In BLOG: commit the post + images. Push if the user asked (they publish from the default branch).
-   - In VAULT: commit the candidate status change **and the exported `.svg` files** (so a fresh clone on another machine can publish without re-rendering). Push if asked.
+   - In BLOG: commit the post + images. Push only if the user asked (they publish from the default branch).
+   - In VAULT: commit the candidate status change **and the exported `.svg` files** (so a fresh clone on another machine can publish without re-rendering). Push only if asked.
 
 Report: post path, permalink, image count, and the commits. Do not delete anything from the vault.
