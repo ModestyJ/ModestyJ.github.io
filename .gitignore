@@ -21,6 +21,9 @@ codekit-config.json
 # macOS
 .DS_Store
 
+# Claude Code local settings
+.claude/settings.local.json
+
 # Jekyll generated files
 .jekyll-cache
 .jekyll-metadata
