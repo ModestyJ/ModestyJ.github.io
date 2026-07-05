@@ -14,11 +14,11 @@ First that exists wins (`test -d`):
 If none resolve, ask the user.
 
 ## Layout
-- Candidates: `<VAULT>/Publish/<slug>/<slug>.md`; diagrams + auto-exported SVGs in `<VAULT>/Publish/<slug>/diagrams/`
+- Candidates: `<VAULT>/98. Publish/<slug>/<slug>.md`; diagrams + auto-exported SVGs in `<VAULT>/98. Publish/<slug>/diagrams/`
 - Posts: `<BLOG>/_posts/`; images: `<BLOG>/assets/images/<slug>/`
 
 ## Select the candidate
-If the user named a slug/title, use it. Otherwise scan `<VAULT>/Publish/*/` for `status: ready` candidates and list them; if more than one, ask which. Only publish `ready` unless the user overrides.
+If the user named a slug/title, use it. Otherwise scan `<VAULT>/98. Publish/*/` for `status: ready` candidates and list them; if more than one, ask which. Only publish `ready` unless the user overrides.
 
 ## Category mapping (candidate `category` key → blog taxonomy)
 | key | permalink base | `categories:` value | title prefix |

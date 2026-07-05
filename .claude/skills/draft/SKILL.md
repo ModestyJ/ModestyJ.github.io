@@ -15,13 +15,13 @@ If none resolve, ask the user.
 
 ## Choose the sources
 - If the user named a topic or specific stones/memos, use those.
-- **Otherwise read the Draft Basket** at `<VAULT>/Publish/_basket.md`: collect the `- [[...]]` links under its `## Items` section — those are the sources. **After** the candidate is written, empty the basket (clear the list under `## Items`).
+- **Otherwise read the Draft Basket** at `<VAULT>/98. Publish/_basket.md`: collect the `- [[...]]` links under its `## Items` section — those are the sources. **After** the candidate is written, empty the basket (clear the list under `## Items`).
 - If both are empty, ask the user what to draft.
-- Sources come from `Projects/*/Stones/*.md` (🪨 Stones) and interest folders `1. Language`, `2. Wiki`, `3. Papers`, `4. Research`, `5. Tech`. Read each in full. Never invent facts — trace everything to real notes (or clearly-marked general knowledge).
+- Sources come from `1. Projects/*/Stones/*.md` (🪨 Stones) and interest folders `2. Wiki`, `3. Papers`, `4. Research`, `5. Tech`, `6. Language`. Read each in full. Never invent facts — trace everything to real notes (or clearly-marked general knowledge).
 
 ## Create the candidate
 1. **Slug & category**: slug = kebab-case of the title. Category ∈ `arch | ml | chip | lang | env` — infer, confirm if unsure.
-2. Write `<VAULT>/Publish/<slug>/<slug>.md`:
+2. Write `<VAULT>/98. Publish/<slug>/<slug>.md`:
    ```
    ---
    type: publication
@@ -36,7 +36,7 @@ If none resolve, ask the user.
    ---
    ```
 3. **Write image-first**: diagrams over prose — a short hook, then lead each concept with a diagram and tight text beneath. Prefer one diagram per major idea.
-4. **Diagrams as Excalidraw** in `<VAULT>/Publish/<slug>/diagrams/`, one `.excalidraw.md` per concept, embedded via `![[diagrams/<name>.excalidraw]]` (use the skeleton in `reference/excalidraw-skeleton.md`). Then tell the user to **open each drawing once in Obsidian** so its SVG auto-exports.
+4. **Diagrams as Excalidraw** in `<VAULT>/98. Publish/<slug>/diagrams/`, one `.excalidraw.md` per concept, embedded via `![[diagrams/<name>.excalidraw]]` (use the skeleton in `reference/excalidraw-skeleton.md`). Then tell the user to **open each drawing once in Obsidian** so its SVG auto-exports.
 5. Report the candidate path; remind the user to review, mark **ready** (Publish Queue button or `status: ready`), then run the `publish` skill.
 
 Write files with the Write tool at the resolved vault paths. Do not run git — publishing is the `publish` skill's job.
