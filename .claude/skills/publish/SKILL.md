@@ -13,6 +13,8 @@ First that exists wins (`test -d`):
 - **BLOG** (cwd is usually this): `$CAIRN_BLOG_DIR` → sibling `../ModestyJ.github.io` → current repo root
 If none resolve, ask the user.
 
+**Never rely on the shell's current directory.** It may be pointing at the vault. Every git and file operation must target an explicitly-resolved absolute path: run git as `git -C "<BLOG>" …` or `git -C "<VAULT>" …`, and read/write files by their full resolved path. A bare `git commit` is a bug.
+
 ## Layout
 - Candidates: `<VAULT>/98. Publish/<slug>/<slug>.md`; diagrams + auto-exported SVGs in `<VAULT>/98. Publish/<slug>/diagrams/`
 - Posts: `<BLOG>/_posts/`; images: `<BLOG>/assets/images/<slug>/`
@@ -51,8 +53,9 @@ If the user named a slug/title, use it. Otherwise scan `<VAULT>/98. Publish/*/` 
    ```
 5. **Verify**: `bundle exec jekyll build` if feasible, or confirm post path, permalink, and that every referenced image exists.
 6. **Update the candidate** (in VAULT): set `status: published` and `published_url: https://ModestyJ.github.io/categories/<key>/<slug>`.
-7. **Commit for portability**:
-   - In BLOG: commit the post + images. Push only if the user asked (they publish from the default branch).
-   - In VAULT: commit the candidate status change **and the exported `.svg` files** (so a fresh clone on another machine can publish without re-rendering). Push only if asked.
+7. **Commit for portability** — always use `git -C` so the shell's cwd is irrelevant:
+   - BLOG: `git -C "<BLOG>" add _posts/<created>-<slug>.md assets/images/<slug>` then `git -C "<BLOG>" commit -m "…"`. Push only if the user asked (`git -C "<BLOG>" push`); they publish from the default branch.
+   - VAULT: `git -C "<VAULT>" add "98. Publish/<slug>"` (candidate status change **and** the exported `.svg` files, so a fresh clone can publish without re-rendering) then `git -C "<VAULT>" commit -m "…"`. Push only if asked.
+   - Verify each commit landed in the intended repo (`git -C "<repo>" log --oneline -1`) before reporting.
 
-Report: post path, permalink, image count, and the commits. Do not delete anything from the vault.
+Report: post path, permalink, image count, and both commits. Do not delete anything from the vault.
