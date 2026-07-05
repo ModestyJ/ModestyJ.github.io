@@ -10,7 +10,7 @@ Author an image-first **publication candidate** inside the user's Obsidian vault
 ## Resolve paths (portable — no hardcoded absolute path)
 First that exists wins (`test -d`):
 - **VAULT** (Cairn): `$CAIRN_VAULT_DIR` → sibling `../obsidian` → `/Users/jckim/Library/CloudStorage/OneDrive-Personal/obsidian`
-- **BLOG**: `$CAIRN_BLOG_DIR` → sibling `../ModestyJ.github.io` → current repo root if it is the Jekyll site
+- **BLOG**: `$CAIRN_BLOG_DIR` → sibling `../ModestyJ.github.io` → `/Users/jckim/work/ModestyJ.github.io` (this machine)
 If none resolve, ask the user.
 
 ## Choose the sources

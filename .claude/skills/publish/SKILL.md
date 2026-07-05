@@ -10,7 +10,7 @@ Convert a reviewed **publication candidate** from the user's Obsidian vault ("Ca
 ## Resolve paths (portable — no hardcoded absolute path)
 First that exists wins (`test -d`):
 - **VAULT**: `$CAIRN_VAULT_DIR` → sibling `../obsidian` → `/Users/jckim/Library/CloudStorage/OneDrive-Personal/obsidian`
-- **BLOG** (cwd is usually this): `$CAIRN_BLOG_DIR` → sibling `../ModestyJ.github.io` → current repo root
+- **BLOG** (cwd is usually this): `$CAIRN_BLOG_DIR` → sibling `../ModestyJ.github.io` → `/Users/jckim/work/ModestyJ.github.io` (this machine)
 If none resolve, ask the user.
 
 **Never rely on the shell's current directory.** It may be pointing at the vault. Every git and file operation must target an explicitly-resolved absolute path: run git as `git -C "<BLOG>" …` or `git -C "<VAULT>" …`, and read/write files by their full resolved path. A bare `git commit` is a bug.
