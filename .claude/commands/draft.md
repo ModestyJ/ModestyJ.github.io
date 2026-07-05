@@ -2,21 +2,26 @@
 description: Draft an image-first publication candidate in the Cairn vault from selected Stones/memos
 ---
 
-You are drafting a **publication candidate** for the user's github.io blog, authored inside their Obsidian vault ("Cairn"). The user reviews it in Obsidian, then `/publish` converts it to a Jekyll post.
+Draft a **publication candidate** for the github.io blog, authored inside the user's Obsidian vault ("Cairn"). The user reviews it in Obsidian, then `/publish` converts it to a Jekyll post.
 
-## Paths
-- Vault root: `/Users/jckim/Library/CloudStorage/OneDrive-Personal/obsidian`
-- Candidates live at: `Publish/<slug>/<slug>.md` (per-candidate folder)
-- Diagrams: `Publish/<slug>/diagrams/*.excalidraw.md` (Excalidraw; auto-export SVG is ON, so a sibling `.svg` appears after the user opens/saves each drawing in Obsidian)
-- Knowledge sources to pull from: `Projects/*/Stones/*.md` (🪨 Stones) and interest folders `1. Language`, `2. Wiki`, `3. Papers`, `4. Research`, `5. Tech`.
+## Resolve paths (portable — no hardcoded absolute path)
+Find each repo by checking these in order and using the first that exists (`test -d`):
+- **VAULT** (Obsidian/Cairn): `$CAIRN_VAULT_DIR` → sibling `../obsidian` → `/Users/jckim/Library/CloudStorage/OneDrive-Personal/obsidian`
+- **BLOG**: `$CAIRN_BLOG_DIR` → sibling `../ModestyJ.github.io` → the current repo root if it looks like the Jekyll site
+If none resolve, ask the user for the path. (This lets the same command run on any machine: sibling clones use `../`, this Mac uses the OneDrive/`~/work` paths.)
+
+## Layout inside VAULT
+- Candidates: `Publish/<slug>/<slug>.md` (per-candidate folder)
+- Diagrams: `Publish/<slug>/diagrams/*.excalidraw.md` (Excalidraw; auto-export SVG is ON → a sibling `.svg` appears after the drawing is opened/saved in Obsidian)
+- Sources to pull from: `Projects/*/Stones/*.md` (🪨 Stones) and interest folders `1. Language`, `2. Wiki`, `3. Papers`, `4. Research`, `5. Tech`.
 
 ## Input
-`$ARGUMENTS` is the topic and/or the specific Stones/memos to summarize. If it's vague or no sources are named, first search the vault for candidate Stones/memos on the topic, list the strongest 3–8, and ask the user which to include before drafting. Do not invent facts — everything must trace to real notes (or clearly-marked general knowledge).
+`$ARGUMENTS` is the topic and/or specific Stones/memos. If vague, search the vault for candidates, list the strongest 3–8, and ask which to include before drafting. Never invent facts — everything traces to real notes (or clearly-marked general knowledge).
 
 ## Steps
-1. **Gather**: read the chosen Stones/memos in full. Note their key claims, and any existing images/links worth carrying over. Collect their paths for the `sources` frontmatter (as `"[[note name]]"`).
-2. **Pick slug & category**: slug = kebab-case of the title. Category is one of `arch | ml | chip | lang | env` (Architecture / Machine Learning / Chip / Language / Environment) — infer from the sources, confirm if unsure.
-3. **Create the candidate** at `Publish/<slug>/<slug>.md` with this frontmatter:
+1. **Gather**: read the chosen Stones/memos in full; collect their vault paths for `sources` (as `"[[note name]]"`).
+2. **Slug & category**: slug = kebab-case of the title. Category ∈ `arch | ml | chip | lang | env` — infer, confirm if unsure.
+3. **Create** `Publish/<slug>/<slug>.md` with frontmatter:
    ```
    ---
    type: publication
@@ -30,9 +35,9 @@ You are drafting a **publication candidate** for the user's github.io blog, auth
    published_url:
    ---
    ```
-4. **Write it image-first.** This blog favors diagrams over prose. Structure: a short hook, then **lead each concept with a diagram**, with tight explanatory text underneath. Prefer one diagram per major idea. Keep prose lean — the images carry the load.
-5. **Make the diagrams as Excalidraw files** in `Publish/<slug>/diagrams/`, one `.excalidraw.md` per concept, and embed them in the candidate with `![[diagrams/<name>.excalidraw]]`. Use the minimal Obsidian-Excalidraw format below; lay out labeled boxes + arrows for the concept (best-effort starting point the user will refine). After creating them, tell the user to **open each drawing once in Obsidian** so the SVG auto-exports (publish needs the `.svg`).
-6. Report the candidate path and remind the user to review it, mark it **ready** (Publish Queue button or `status: ready`), then run `/publish`.
+4. **Write image-first.** Diagrams over prose: a short hook, then lead each concept with a diagram and tight text under it. Prefer one diagram per major idea.
+5. **Diagrams as Excalidraw** in `Publish/<slug>/diagrams/`, one `.excalidraw.md` per concept, embedded via `![[diagrams/<name>.excalidraw]]`. Use the minimal skeleton below (labeled boxes + arrows as a starting point). Then tell the user to **open each drawing once in Obsidian** so the SVG auto-exports.
+6. Report the candidate path; remind the user to review, mark **ready** (Publish Queue button or `status: ready`), then run `/publish`.
 
 ## Minimal Excalidraw file skeleton (`.excalidraw.md`)
 ```
@@ -54,6 +59,6 @@ tags: [excalidraw]
 ​```
 %%
 ```
-Extend `elements` with more rectangles, `arrow`/`line`, and `text` to express the concept. Keep it simple and legible; the user refines it in Obsidian.
+Extend `elements` with more rectangles, `arrow`/`line`, and `text`. Keep it legible; the user refines it in Obsidian.
 
-Write files with the Write tool at the absolute vault paths. Do not run git here — publishing is `/publish`'s job.
+Write files with the Write tool at the resolved vault paths. Do not run git here — publishing is `/publish`'s job.

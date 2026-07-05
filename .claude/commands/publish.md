@@ -2,15 +2,20 @@
 description: Convert a ready publication candidate from the Cairn vault into a Jekyll post on github.io
 ---
 
-You are publishing a reviewed **publication candidate** from the user's Obsidian vault ("Cairn") into this Jekyll blog (`ModestyJ.github.io`). Follow this repo's conventions in `CLAUDE.md` exactly.
+Publish a reviewed **publication candidate** from the user's Obsidian vault ("Cairn") into this Jekyll blog. Follow this repo's `CLAUDE.md` conventions exactly.
 
-## Paths
-- Vault root: `/Users/jckim/Library/CloudStorage/OneDrive-Personal/obsidian`
-- Candidates: `Publish/<slug>/<slug>.md`, diagrams in `Publish/<slug>/diagrams/` (Excalidraw `.excalidraw.md` + auto-exported `.svg` siblings)
-- Blog repo (cwd): `/Users/jckim/work/ModestyJ.github.io`
+## Resolve paths (portable — no hardcoded absolute path)
+First that exists wins (`test -d`):
+- **VAULT**: `$CAIRN_VAULT_DIR` → sibling `../obsidian` → `/Users/jckim/Library/CloudStorage/OneDrive-Personal/obsidian`
+- **BLOG** (cwd is usually this): `$CAIRN_BLOG_DIR` → sibling `../ModestyJ.github.io` → current repo root
+If none resolve, ask the user. (Sibling clones use `../`; this Mac uses OneDrive/`~/work`.)
+
+## Layout
+- Candidates: `<VAULT>/Publish/<slug>/<slug>.md`; diagrams + auto-exported SVGs in `<VAULT>/Publish/<slug>/diagrams/`
+- Posts: `<BLOG>/_posts/`; images: `<BLOG>/assets/images/<slug>/`
 
 ## Select the candidate
-`$ARGUMENTS` may name a slug/title. Otherwise, scan `Publish/*/` for candidates with `status: ready` and list them; if more than one, ask which to publish. Only publish `ready` candidates unless the user explicitly overrides.
+`$ARGUMENTS` may name a slug/title. Otherwise scan `<VAULT>/Publish/*/` for `status: ready` candidates and list them; if >1, ask which. Only publish `ready` unless the user overrides.
 
 ## Category mapping (candidate `category` key → blog taxonomy)
 | key | permalink base | `categories:` value | title prefix |
@@ -22,28 +27,29 @@ You are publishing a reviewed **publication candidate** from the user's Obsidian
 | env  | `/categories/env/`  | `Environment` | `[Environment]` |
 
 ## Steps
-1. **Read** the candidate `.md` and its frontmatter (title, category, tags, slug, created).
-2. **Copy images**: create `assets/images/<slug>/` in the blog repo. For every embed in the candidate:
-   - `![[diagrams/<name>.excalidraw]]` → find the exported SVG sibling (`diagrams/<name>.excalidraw.svg` or `diagrams/<name>.svg`) and copy it to `assets/images/<slug>/<name>.svg`. If no SVG exists yet, STOP and tell the user to open that drawing in Obsidian once (auto-export) — do not publish half the images.
-   - Any other embedded image (`![[img.png]]` / `![](path)`) → copy into `assets/images/<slug>/` too.
-3. **Convert the body**: strip the candidate's `> [!info]` helper callout; rewrite every image embed to Jekyll form pointing at the copied file, e.g. `![<name>](/assets/images/<slug>/<name>.svg)`. Convert any `[[wikilinks]]` that don't resolve on the blog into plain text or drop them. Keep the image-first structure.
-4. **Write the post** at `_posts/<created>-<slug>.md` with frontmatter following existing posts:
+1. **Read** the candidate `.md` + frontmatter (title, category, tags, slug, created).
+2. **Copy images** into `<BLOG>/assets/images/<slug>/`. For each embed:
+   - `![[diagrams/<name>.excalidraw]]` → find the exported SVG sibling (`<name>.excalidraw.svg` or `<name>.svg`) and copy it as `<name>.svg`. **If the SVG is missing, STOP** and tell the user to open that drawing in Obsidian once (auto-export) — never publish with missing diagrams.
+   - Other embeds (`![[img.png]]` / `![](path)`) → copy too.
+3. **Convert body**: drop the `> [!info]` helper callout; rewrite every embed to Jekyll form, e.g. `![<name>](/assets/images/<slug>/<name>.svg)`; convert or drop unresolved `[[wikilinks]]`. Keep the image-first structure.
+4. **Write the post** `<BLOG>/_posts/<created>-<slug>.md`, matching a recent file's frontmatter shape (e.g. `2022-09-26-arch-eyeriss.md`):
    ```
    ---
-   title: "<title prefix> <Title>"
-   excerpt: "<one-line summary>"
+   title: "<prefix> <Title>"
+   excerpt: "<one-line>"
    categories:
      - <categories value>
    tags:
-     - [<tag>, <tag>, ...]
+     - [<tag>, <tag>]
    permalink: /categories/<key>/<slug>
    date: <created>
    last_modified_at: <today>
    ---
    ```
-   (Match the exact shape of a recent file in `_posts/`, e.g. `2022-09-26-arch-eyeriss.md`.)
-5. **Verify** the build if feasible (`bundle exec jekyll build`), or at minimum confirm the post path, permalink, and that every image referenced exists under `assets/images/<slug>/`.
-6. **Update the candidate**: set `status: published` and `published_url: https://ModestyJ.github.io/categories/<key>/<slug>` in the vault candidate's frontmatter, so the Publish Queue shows it as published.
-7. **Commit** the blog repo (post + images). Branch first if on the default branch per repo policy. Ask before `git push` unless the user already said to push.
+5. **Verify**: `bundle exec jekyll build` if feasible, or confirm the post path, permalink, and that every referenced image exists.
+6. **Update the candidate** (in VAULT): set `status: published` and `published_url: https://ModestyJ.github.io/categories/<key>/<slug>`.
+7. **Commit for portability**:
+   - In BLOG: commit the post + images. Push if the user asked (they publish from the default branch).
+   - In VAULT: commit the candidate status change **and the exported `.svg` files** (so a fresh clone on another machine can publish without re-rendering). Push if asked.
 
-Report: the created post path, the permalink, how many images were carried over, and the commit. Do not delete anything from the vault.
+Report: post path, permalink, image count, and the commits. Do not delete anything from the vault.
